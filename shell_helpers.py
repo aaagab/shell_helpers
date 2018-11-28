@@ -8,6 +8,7 @@ import subprocess
 import sys
 import shlex
 import inspect
+import os
 
 try:
 	import modules.message.message as msg
