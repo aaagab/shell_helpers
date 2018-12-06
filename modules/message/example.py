@@ -1,21 +1,15 @@
 #!/usr/bin/env python3
 # author: Gabriel Auger
-# version: 1.0.0-beta-1543110199
+# version: 1.0.0-rc-1544118437
 # name: message
 # license: MIT
 
-import message as msg
 import sys, os
-try:
-    from format_text import Format_text as ft
-except:
-    from .format_text import Format_text as ft
-
-try:
-    from modules.json_config.json_config import Json_config
-except:
-    sys.path.insert(1, os.path.join(sys.path[0], '..'))
-    from json_config.json_config import Json_config
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+from format_text import Format_text as ft
+from modules.json_config.json_config import Json_config
+del sys.path[0:2]
 
 ft.clear_scrolling_history()
 print("scrolling history has been erased")

@@ -8,16 +8,15 @@ import subprocess
 import sys
 import shlex
 import inspect
-import os
 
-try:
-	import modules.message.message as msg
-except:
-    # try:
-    sys.path.insert(1, os.path.join(sys.path[0], '..'))
-    import message.message as msg
-	# except:
-		# import message as msg
+import sys, os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+
+import modules.message.message as msg
+
+del sys.path[0:2]
 
 def cmd_devnull(command):
     try:
