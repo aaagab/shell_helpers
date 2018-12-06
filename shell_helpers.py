@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # author: Gabriel Auger
-# version: 1.0.0-rc-1543371195
+# version: 1.0.0-rc-1544126767
 # name: shell_helpers
 # license: MIT
 
