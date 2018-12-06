@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # author: Gabriel Auger
-# version: 1.0.0-rc-1543251386
+# version: 1.0.0-rc-1544118437
 # name: message
 # license: MIT
 
-try:
-    from format_text import Format_text as ft
-except:
-    from .format_text import Format_text as ft
-
 import traceback
 import inspect, sys, os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+from format_text import Format_text as ft
+del sys.path[0:2]
 
 def app_error(*msgs):
     if len(msgs) == 1:

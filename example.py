@@ -4,13 +4,15 @@
 # name: shell_helpers
 # license: MIT
 
-import shell_helpers as shell
+import sys, os
 
-try:
-	import modules.message.message as msg
-except:
-    sys.path.insert(1, os.path.join(sys.path[0], '..'))
-    import message.message as msg
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+
+import shell_helpers as shell
+import modules.message.message as msg
+
+del sys.path[0:2]
 
 cmd="ls -l"
 
