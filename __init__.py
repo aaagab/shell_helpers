@@ -5,5 +5,5 @@
 # license: MIT
 __version__ = "0.1.0"
 
-from .dev import shell_helpers as shell
+from .dev.shell_helpers import cmd, cmd_get_value, cmd_prompt, cmd_devnull
 from .gpkgs import message as msg
