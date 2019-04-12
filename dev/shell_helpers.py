@@ -11,12 +11,7 @@ import inspect
 
 import sys, os
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
-
-import modules.message.message as msg
-
-del sys.path[0:2]
+from ..gpkgs import message as msg
 
 def cmd_devnull(command):
     try:
