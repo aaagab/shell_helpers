@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # author: Gabriel Auger
-# version: 2.0.0
+# version: 2.1.0
 # name: shell_helpers
 # license: MIT
 
@@ -41,12 +41,12 @@ def cmd_get_value(command):
         else:
             frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
             print("\t"+str(line_number)+": "+filename)
-            msg.app_error("Command: '"+command+"', err: "+stderr.decode("utf-8"))
+            msg.error("Command: '"+command+"', err: "+stderr.decode("utf-8"))
             sys.exit(1)
     except Exception as e:
         frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
         print("\t"+str(line_number)+": "+filename)
-        msg.app_error("Command: '"+command)
+        msg.error("Command: '"+command)
         sys.exit(1)
 
 def cmd_prompt(cmd_txt, prompt_msg=False):
@@ -56,5 +56,5 @@ def cmd_prompt(cmd_txt, prompt_msg=False):
     if cmd(cmd_txt) == 0:
         msg.success(cmd_txt)
     else:
-        msg.app_error(cmd_txt +" failed!")
+        msg.error(cmd_txt +" failed!")
         sys.exit(1)

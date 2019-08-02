@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # author: Gabriel Auger
-# version: 2.0.0
+# version: 2.1.0
 # name: shell_helpers
 # license: MIT
 
@@ -12,7 +12,7 @@ sys.path.insert(0, direpa_script_parent)
 shell = importlib.import_module(module_name)
 del sys.path[0]
 
-cmd="ls -l"
+cmd="echo assembly_language"
 
 shell.msg.info("execute command '{}' WITH output.".format(cmd))
 shell.cmd(cmd)
