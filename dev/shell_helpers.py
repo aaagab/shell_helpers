@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # author: Gabriel Auger
-# version: 4.0.0
+# version: 4.0.1
 # name: shell_helpers
 # license: MIT
 
@@ -49,19 +49,19 @@ def cmd_get_value(command, none_on_error=False):
             else:
                 return None
         else:
-            frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
-            print("\t"+str(line_number)+": "+filename)
-            msg.error("Command: '"+command+"', err: "+stderr.decode("utf-8"))
-            sys.exit(1)
+            if none_on_error is True:
+                return None
+            else:
+                frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
+                print("\t"+str(line_number)+": "+filename)
+                msg.error("Command: '"+command+"', err: "+stderr.decode("utf-8"))
+                sys.exit(1)
     except Exception as e:
-        if none_on_error is True:
-            return None
-        else:
-            frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
-            print(e)
-            print("\t"+str(line_number)+": "+filename)
-            msg.error("Command: '"+command)
-            sys.exit(1)
+        frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
+        print(e)
+        print("\t"+str(line_number)+": "+filename)
+        msg.error("Command: '"+command)
+        sys.exit(1)
 
 def cmd_prompt(cmd_txt, prompt_msg=False):
     if prompt_msg:
