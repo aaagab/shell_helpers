@@ -36,7 +36,7 @@ def cmd(command):
     except subprocess.CalledProcessError as proc:
         return proc.returncode
 
-def cmd_get_value(command):
+def cmd_get_value(command, return_error=True):
     try:
         process = subprocess.Popen(get_split_cmd(command), 
                                     shell=False, 
@@ -47,18 +47,21 @@ def cmd_get_value(command):
             if stdout:
                 return stdout.decode("utf-8").rstrip()
             else:
-                return ""
+                return None
         else:
             frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
             print("\t"+str(line_number)+": "+filename)
             msg.error("Command: '"+command+"', err: "+stderr.decode("utf-8"))
             sys.exit(1)
     except Exception as e:
-        frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
-        print(e)
-        print("\t"+str(line_number)+": "+filename)
-        msg.error("Command: '"+command)
-        sys.exit(1)
+        if return_error is True:
+            frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
+            print(e)
+            print("\t"+str(line_number)+": "+filename)
+            msg.error("Command: '"+command)
+            sys.exit(1)
+        else:
+            return None
 
 def cmd_prompt(cmd_txt, prompt_msg=False):
     if prompt_msg:
