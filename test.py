@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # author: Gabriel Auger
-# version: 4.0.1
+# version: 5.0.0
 # name: shell_helpers
 # license: MIT
 
@@ -32,5 +32,5 @@ print(output)
 print()
 
 shell.msg.info("verbose command '{}' mode.".format(cmd))
-shell.cmd_prompt(cmd, True)
+shell.cmd_prompt(cmd, info=True)
 print()
