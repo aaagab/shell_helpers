@@ -32,5 +32,5 @@ print(output)
 print()
 
 shell.msg.info("verbose command '{}' mode.".format(cmd))
-shell.cmd_prompt(cmd, True)
+shell.cmd_prompt(cmd, info=True)
 print()

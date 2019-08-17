@@ -63,12 +63,21 @@ def cmd_get_value(command, none_on_error=False):
         msg.error("Command: '"+command)
         sys.exit(1)
 
-def cmd_prompt(cmd_txt, prompt_msg=False):
-    if prompt_msg:
+def cmd_prompt(cmd_txt, 
+    error=True,
+    fail_exit=1, 
+    info=False, 
+    success=True, 
+):
+    if info is True:
         msg.info(cmd_txt)
 
     if cmd(cmd_txt) == 0:
-        msg.success(cmd_txt)
+        if success is True:
+            msg.success(cmd_txt)
     else:
-        msg.error(cmd_txt +" failed!")
-        sys.exit(1)
+        if error is True:
+            msg.error(cmd_txt +" failed!")
+        if fail_exit is not None:
+            sys.exit(fail_exit)
+
