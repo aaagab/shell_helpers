@@ -36,19 +36,18 @@ def cmd(command):
     except subprocess.CalledProcessError as proc:
         return proc.returncode
 
-def cmd_get_value(command, none_on_error=False):
+def cmd_get_value(command, none_on_error=False, no_err_if_std=False):
     try:
         process = subprocess.Popen(get_split_cmd(command), 
                                     shell=False, 
                                     stdout=subprocess.PIPE, 
                                     stderr=subprocess.PIPE)
         ( stdout, stderr ) = process.communicate()
-        if not stderr:
-            if stdout:
-                return stdout.decode("utf-8").rstrip()
-            else:
-                return None
-        else:
+        if stderr:
+            if no_err_if_std is True:
+                if stdout:
+                    return stdout.decode("utf-8").rstrip()
+
             if none_on_error is True:
                 return None
             else:
@@ -56,6 +55,11 @@ def cmd_get_value(command, none_on_error=False):
                 print("\t"+str(line_number)+": "+filename)
                 msg.error("Command: '"+command+"', err: "+stderr.decode("utf-8"))
                 sys.exit(1)
+
+        if stdout:
+            return stdout.decode("utf-8").rstrip()
+        else:
+            return None
     except Exception as e:
         frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
         print(e)
