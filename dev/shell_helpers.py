@@ -83,7 +83,7 @@ def cmd_prompt(cmd_txt,
             msg.success(get_cmd_str(cmd_txt))
     else:
         if error is True:
-            msg.error(get_cmd_str(cmd_txt +" failed!"))
+            msg.error(get_cmd_str(cmd_txt) +" failed!")
         if fail_exit is not None:
             sys.exit(fail_exit)
 
