@@ -16,7 +16,9 @@ import sys, os
 from ..gpkgs import message as msg
 
 def get_split_cmd(command):
-    split_cmd=shlex.split(command)
+    split_cmd=command
+    if isinstance(command, str):
+        split_cmd=shlex.split(command)
     if platform.system() == "Windows":
         if shutil.which(split_cmd[0]) is None:
             split_cmd.insert(0, "cmd")
@@ -53,7 +55,7 @@ def cmd_get_value(command, none_on_error=False, no_err_if_std=False):
             else:
                 frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
                 print("\t"+str(line_number)+": "+filename)
-                msg.error("Command: '"+command+"', err: "+stderr.decode("utf-8"))
+                msg.error("Command: '"+get_cmd_str(command)+"', err: "+stderr.decode("utf-8"))
                 sys.exit(1)
 
         if stdout:
@@ -64,7 +66,7 @@ def cmd_get_value(command, none_on_error=False, no_err_if_std=False):
         frame,filename,line_number,function_name,lines,index=inspect.stack()[1]
         print(e)
         print("\t"+str(line_number)+": "+filename)
-        msg.error("Command: '"+command)
+        msg.error("Command: '"+get_cmd_str(command))
         sys.exit(1)
 
 def cmd_prompt(cmd_txt, 
@@ -74,14 +76,29 @@ def cmd_prompt(cmd_txt,
     success=True, 
 ):
     if info is True:
-        msg.info(cmd_txt)
+        msg.info(get_cmd_str(cmd_txt))
 
     if cmd(cmd_txt) == 0:
         if success is True:
-            msg.success(cmd_txt)
+            msg.success(get_cmd_str(cmd_txt))
     else:
         if error is True:
-            msg.error(cmd_txt +" failed!")
+            msg.error(get_cmd_str(cmd_txt +" failed!"))
         if fail_exit is not None:
             sys.exit(fail_exit)
+
+def get_cmd_str(command):
+    if isinstance(command, str):
+        return command
+    else:
+        cmd_string=""
+        for e, elem in enumerate(command):
+            if " " in elem:
+                elem='"{}"'.format(elem)
+            if e == 0:
+                cmd_string=elem
+            else:
+                cmd_string+=" {}".format(elem)
+
+        return cmd_string
 
