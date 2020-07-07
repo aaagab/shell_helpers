@@ -20,9 +20,9 @@ def get_split_cmd(command):
     if isinstance(command, str):
         split_cmd=shlex.split(command)
     if platform.system() == "Windows":
-        if shutil.which(split_cmd[0]) is None:
-            split_cmd.insert(0, "cmd")
-            split_cmd.insert(1, "/c")
+        # if shutil.which(split_cmd[0]) is None:
+        split_cmd.insert(0, "cmd")
+        split_cmd.insert(1, "/c")
     return split_cmd
 
 def cmd_devnull(command):
