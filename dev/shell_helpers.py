@@ -102,3 +102,12 @@ def get_cmd_str(command):
 
         return cmd_string
 
+def rmtree(path, pfm=None):
+    if pfm is None:
+        pfm=platform.system()
+    if pfm == "Windows":
+        os.system('rmdir /S /Q "{}"'.format(path))
+    elif pfm == "Linux":
+        shutil.rmtree(path)
+    else:
+        msg.error("platform '{}' not supported".format(pfm), trace=True, exit=1)
