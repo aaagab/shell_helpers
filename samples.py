@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # author: Gabriel Auger
-# version: 5.1.0
+# version: 5.4.2
 # name: shell_helpers
 # license: MIT
 
@@ -32,5 +32,14 @@ print(output)
 print()
 
 shell.msg.info("verbose command '{}' mode.".format(cmd))
+shell.cmd_prompt(cmd, info=True)
+print()
+
+cmd=[
+    "echo",
+    "'assembly_language'"
+]
+
+shell.msg.info("verbose list command '{}' mode.".format(cmd))
 shell.cmd_prompt(cmd, info=True)
 print()
